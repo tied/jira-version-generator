@@ -5,7 +5,7 @@
 
 	<groupId>com.infobip</groupId>
 	<artifactId>jira-version-generator</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.2-SNAPSHOT</version>
 	<packaging>atlassian-plugin</packaging>
 
 	<name>Jira Version Generator</name>
@@ -63,21 +63,21 @@
 
 	<properties>
 		<!-- DEPENDENCY VERSIONS -->
-		<bitbucket.version>4.8.2</bitbucket.version>
-		<amps.version>6.2.6</amps.version>
+		<bitbucket.version>6.5.1</bitbucket.version>
+		<amps.version>8.0.1</amps.version>
 		<slf4j.version>1.7.21</slf4j.version>
-		<jackson.version>2.8.1</jackson.version>
+		<jackson.version>2.12.3</jackson.version>
 		<assertj-core.version>3.5.2</assertj-core.version>
 		<mockito-core.version>1.10.19</mockito-core.version>
 		<bitbucket.data.version>4.8.2</bitbucket.data.version>
 
-		<lombok.version>1.16.10</lombok.version>
+		<lombok.version>1.18.20</lombok.version>
 
 		<!-- PLUGIN VERSIONS -->
-		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
-		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
-		<cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
-		<coveralls-maven-plugin.version>4.2.0</coveralls-maven-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+		<coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<bitbucket-maven-plugin.version>1.30.5</bitbucket-maven-plugin.version>
 
 		<!-- OTHER PROPERTIES -->
@@ -181,7 +181,6 @@
 				<version>${amps.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<enableFastdev>false</enableFastdev>
 					<products>
 						<product>
 							<id>bitbucket</id>
@@ -208,56 +207,33 @@
 					<target>${java.version}</target>
 					<compilerArgument>-parameters</compilerArgument>
 					<testCompilerArgument>-parameters</testCompilerArgument>
+					<encoding>utf8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>${maven-enforcer-plugin.version}</version>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
 				<executions>
 					<execution>
-						<id>enforce-java</id>
 						<goals>
-							<goal>enforce</goal>
+							<goal>prepare-agent</goal>
 						</goals>
-						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>${java.version}</version>
-								</requireJavaVersion>
-							</rules>
-							<fail>true</fail>
-						</configuration>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
 					</execution>
 				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura-maven-plugin.version}</version>
-				<configuration>
-					<format>xml</format>
-					<aggregate>true</aggregate>
-					<instrumentation>
-						<exclude>com/fasterxml/**/*.class</exclude>
-					</instrumentation>
-				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.eluder.coveralls</groupId>
 				<artifactId>coveralls-maven-plugin</artifactId>
 				<version>${coveralls-maven-plugin.version}</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<skipSource>true</skipSource>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -276,7 +252,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
+						<version>${maven-gpg-plugin.version}</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>

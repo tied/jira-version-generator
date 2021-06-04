@@ -1,8 +1,6 @@
 # Jira Version Generator
 
-[![Join the chat at https://gitter.im/infobip/jira-version-generator](https://badges.gitter.im/infobip/jira-version-generator.svg)](https://gitter.im/infobip/jira-version-generator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Build Status](https://travis-ci.org/infobip/jira-version-generator.svg?branch=master)](https://travis-ci.org/infobip/jira-version-generator)
+![](https://github.com/infobip/jira-version-generator/workflows/maven/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/infobip/jira-version-generator/badge.png?branch=master)](https://coveralls.io/r/infobip/jira-version-generator?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.infobip/jira-version-generator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.infobip/jira-version-generator)
 
@@ -25,9 +23,9 @@
 
 ## <a name="News"></a> News
 
-### 2.0.0
+### 2.0.1
 
-Upgrade to Java 8 and Bitbucket Server.
+Upgrade to Bitbucket Server 6.5.1.
 
 For previous changes see the [changelog](https://github.com/infobip/jira-version-generator/blob/master/CHANGELOG.md).
 
